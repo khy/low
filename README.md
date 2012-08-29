@@ -1,4 +1,4 @@
-brack
+low
 =====
 
-A Rack stack named brack
+A utility library that never strays too far from the metal.
