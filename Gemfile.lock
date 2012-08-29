@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    brack (0.0.1)
+    low (0.0.2)
       rack
 
 GEM
@@ -29,8 +29,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  brack!
   bson_ext
+  low!
   mongo
   rack-test
   rspec

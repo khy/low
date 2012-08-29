@@ -1,4 +1,4 @@
-module Brack
+module Low
   # `SubdomainMap` is Rack middleware that delegates to other Rack apps based
   # upon subdomain. It takes two arguments upon initialization:
   #

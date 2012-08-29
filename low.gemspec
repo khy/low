@@ -1,19 +1,19 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../lib/brack/version', __FILE__)
+require File.expand_path('../lib/low/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ['Kevin Hyland']
   gem.email         = ['khy@me.com']
-  gem.description   = 'A Rack stack named brack'
-  gem.summary       = 'A collection of racks that I\'m partial towards.'
+  gem.description   = 'A low-level utility library.'
+  gem.summary       = 'A low-level utility library.'
   gem.homepage      = ''
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
-  gem.name          = 'brack'
+  gem.name          = 'low'
   gem.require_paths = ['lib']
-  gem.version       = Brack::VERSION
+  gem.version       = Low::VERSION
 
   gem.add_runtime_dependency 'rack'
 

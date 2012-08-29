@@ -1,6 +1,6 @@
 require 'mongo'
 
-module Brack
+module Low
   # The `Mongo` module defines an interface for a Mongo helper
   # class. It also includes two basic classes, `Local` and `Remote`.
   module Mongo
