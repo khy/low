@@ -16,9 +16,9 @@ Gem::Specification.new do |gem|
   gem.version       = Low::VERSION
 
   gem.add_runtime_dependency 'rack'
+  gem.add_runtime_dependency 'mongo'
+  gem.add_runtime_dependency 'bson_ext'
 
   gem.add_development_dependency 'rspec'
   gem.add_development_dependency 'rack-test'
-  gem.add_development_dependency 'mongo'
-  gem.add_development_dependency 'bson_ext'
 end
