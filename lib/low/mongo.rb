@@ -78,9 +78,23 @@ module Low
         @connection ||= ::Mongo::Connection.from_uri(uri)
       end
 
-      # The database can be extracted from the URI.
+      # The database can be extracted from the URI,
       def database
-        uri.match(/.*\/(.*)$/)[1]
+        @uri.match(/.*\/(.*)$/)[1]
+      end
+
+      # as can the username,
+      def username
+        if match = @uri.match(/^.*:\/\/(.*?):.*/)
+          match[1]
+        end
+      end
+
+      # and password.
+      def password
+        if match = @uri.match(/^.*:\/\/.*?:(.*?)@.*/)
+          match[1]
+        end
       end
     end
   end

@@ -105,6 +105,30 @@ describe Low::Mongo::Remote do
     end
   end
 
+  describe '#username' do
+    it 'should return nil if the URI does not specify a username' do
+      mongo = Low::Mongo::Remote.new('mongodb://mongo.com/low_remote')
+      mongo.username.should be_nil
+    end
+
+    it 'should return the appropriate value extracted from the URI' do
+      mongo = Low::Mongo::Remote.new('mongodb://khy:secret@mongo.com/low_remote')
+      mongo.username.should == 'khy'
+    end
+  end
+
+  describe '#password' do
+    it 'should return nil if the URI does not specify a password' do
+      mongo = Low::Mongo::Remote.new('mongodb://mongo.com/low_remote')
+      mongo.password.should be_nil
+    end
+
+    it 'should return the appropriate value extracted from the URI' do
+      mongo = Low::Mongo::Remote.new('mongodb://khy:secret@mongo.com/low_remote')
+      mongo.password.should == 'secret'
+    end
+  end
+
   describe '#connection' do
     it 'should pass uri to the ::Mongo::Connection.from_uri method' do
       connection = double('mongo connection')
