@@ -19,4 +19,15 @@ describe Low::Mongo::Util do
       uris.should include('mongodb://heroku_app2:secret2@mongohq.com:29827/heroku_app2')
     end
   end
+
+  describe '.sync_from_remote' do
+    it 'should delegate to #copy_database on the local connection' do
+      local = Low::Mongo::Local.new('low_local')
+      remote = Low::Mongo::Remote.new('mongodb://khy:secret@mongo.com:1234/low_remote')
+      connection = mock(:connection)
+      local.should_receive(:connection).and_return(connection)
+      connection.should_receive(:copy_database).with('low_remote', 'low_local', 'mongo.com:1234', 'khy', 'secret')
+      Low::Mongo::Util.sync_from_remote(local, remote)
+    end
+  end
 end

@@ -18,6 +18,40 @@ module Low
           Mongo::Remote.new(uri)
         end
       end
+
+      def self.sync_from_remote(local_database_or_mongo, remote)
+        # If a Mongo::Local is specified,
+        local = local_database_or_mongo.is_a?(Mongo::Local) ?
+
+          # use it,
+          local_database_or_mongo :
+
+          # otherwise, assume that it is a database name and build one.
+          Mongo::Local.new(local_database_or_mongo)
+
+        # Extract host and port from the remote URI,
+        match = remote.uri.match(URI.regexp('mongodb'))
+        remote_host = match[4]
+        remote_port = match[5]
+
+        # and copy the database.
+        local.connection.copy_database(
+          remote.database,
+          local.database,
+          "#{remote_host}:#{remote_port}",
+          remote.username,
+          remote.password
+        )
+      end
+
+      def self.sync_heroku(local_database_or_mongo)
+        # If there is a remote Heroku Mongo,
+        if remote = heroku_remote_mongo
+
+          # sync it to the specified database or Mongo.
+          sync_from_remote(local_database_or_mongo, remote)
+        end
+      end
     end
   end
 end
