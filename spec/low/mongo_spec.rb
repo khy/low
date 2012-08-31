@@ -59,9 +59,33 @@ describe Low::Mongo::Local do
       mongo.host.should == 'localhost'
     end
 
-    it 'should return the value specified at initialization' do
-      mongo = Low::Mongo::Local.new('low_test', '0.0.0.0')
+    it 'should return the value specified by the named parameter at initialization' do
+      mongo = Low::Mongo::Local.new('low_test', host: '0.0.0.0')
       mongo.host.should == '0.0.0.0'
+    end
+  end
+
+  describe '#username' do
+    it 'should return nil if none is specified at initialization' do
+      mongo = Low::Mongo::Local.new('low_test')
+      mongo.username.should be_nil
+    end
+
+    it 'should return the value specified by the named parameter at initialization' do
+      mongo = Low::Mongo::Local.new('low_test', username: 'khy')
+      mongo.username.should == 'khy'
+    end
+  end
+
+  describe '#password' do
+    it 'should return nil if none is specified at initialization' do
+      mongo = Low::Mongo::Local.new('low_test')
+      mongo.username.should be_nil
+    end
+
+    it 'should return the value specified by the named parameter at initialization' do
+      mongo = Low::Mongo::Local.new('low_test', password: 'secret')
+      mongo.password.should == 'secret'
     end
   end
 end

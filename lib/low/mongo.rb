@@ -33,6 +33,12 @@ module Low
     def database
     end
 
+    def username
+    end
+
+    def password
+    end
+
     # Force a new connection the next time one is needed
     def reset_connection!
       @grid = nil
@@ -44,13 +50,15 @@ module Low
     class Local
       include Mongo
 
-      attr_reader :host, :database
+      attr_reader :host, :database, :username, :password
 
       # Specify the database upon initialization and
       # assume that the host is localhost (unless told otherwise).
-      def initialize(database, host = nil)
+      def initialize(database, opts = {})
         @database = database
-        @host = host || 'localhost'
+        @host = opts[:host] || 'localhost'
+        @username = opts[:username]
+        @password = opts[:password]
       end
     end
 
