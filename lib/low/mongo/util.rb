@@ -10,15 +10,6 @@ module Low
         URI.extract(string, 'mongodb')
       end
 
-      def self.heroku_remote_mongo
-        # If a mongodb URI can be extracted from heroku config,
-        if uri = extract_mongodb_uris(`heroku config`).first
-
-          # build a Mongo::Remote with it.
-          Mongo::Remote.new(uri)
-        end
-      end
-
       def self.sync_from_remote(local_database_or_mongo, remote)
         # If a Mongo::Local is specified,
         local = local_database_or_mongo.is_a?(Mongo::Local) ?
@@ -42,15 +33,6 @@ module Low
           remote.username,
           remote.password
         )
-      end
-
-      def self.sync_heroku(local_database_or_mongo)
-        # If there is a remote Heroku Mongo,
-        if remote = heroku_remote_mongo
-
-          # sync it to the specified database or Mongo.
-          sync_from_remote(local_database_or_mongo, remote)
-        end
       end
     end
   end
