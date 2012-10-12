@@ -7,7 +7,7 @@ module Low
     #   the log directory, otherwise use STDOUT (as Heroku likes).
     # * _log_level_: If set, use the LOG_LEVEL environment variable value;
     #   otherwise, use INFO.
-    # * _group_key_: Use request_id env value.
+    # * _group_key_: Use request_id env value (see the RequestId middleware).
     class RequestLogger
       def self.level
         # If `LOG_LEVEL` is a valid level other than INFO,
