@@ -44,18 +44,18 @@ module Low
       end
 
       def call(env)
-        # Set the 'rack.errors' environment key to the above `Logger.io`
+        # Set the 'rack.errors' environment key to the above `RequestLogger.io`
         # (other rack components, such as Sinatra, use this),
-        env['rack.errors'] = Logger.io
+        env['rack.errors'] = RequestLogger.io
 
         # instantiate a new `Useless::Logger`,
-        logger = Useless::Logger.new(env['rack.errors'])
+        logger = Low::ScopedLogger.new(env['rack.errors'])
 
         # set the logger level to the above `Logger.level`,
-        logger.level = Logger.level
+        logger.level = RequestLogger.level
 
         # set the request_id if one is available
-        logger.scope_key = env['request_id']
+        logger.scope = env['request_id']
 
         # add it to the env,
         env[@key] = logger
