@@ -1,6 +1,6 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require File.dirname(__FILE__) + '/../../spec_helper'
 
-describe Low::SubdomainMap do
+describe Low::Middleware::SubdomainMap do
   def map
     default_app = lambda do |env|
       [200, {'Content-Type' => 'text/plain'}, ['Default App']]
@@ -10,7 +10,7 @@ describe Low::SubdomainMap do
       [200, {'Content-Type' => 'text/plain'}, ['API App']]
     end
 
-    Low::SubdomainMap.new default_app, 'subdomain' => api_app
+    Low::Middleware::SubdomainMap.new default_app, 'subdomain' => api_app
   end
 
   it 'should call the default app if no subdomain is specified' do
