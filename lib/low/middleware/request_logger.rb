@@ -1,3 +1,5 @@
+require 'logger'
+
 module Low
   module Middleware
     # `RequestLogger` set the env key "logger" to an instance of
