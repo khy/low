@@ -5,6 +5,7 @@ module Low
   autoload :Mongo,        'low/mongo'
 
   module Middleware
+    autoload :LogLevel,       'low/middleware/log_level'
     autoload :RackErrors,     'low/middleware/rack_errors'
     autoload :RequestId,      'low/middleware/request_id'
     autoload :RequestLogger,  'low/middleware/request_logger'

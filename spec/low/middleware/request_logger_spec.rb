@@ -2,35 +2,19 @@ require File.dirname(__FILE__) + '/../../spec_helper'
 require 'logger'
 
 describe Low::Middleware::RequestLogger do
-  describe '.level' do
-    it 'should return Logger::FATAL if the LOG_LEVEL evironment var is \'FATAL\'' do
-      ENV['LOG_LEVEL'] = 'FATAL'
-      Low::Middleware::RequestLogger.level.should == Logger::FATAL
+  def test_app
+    lambda do |env|
+      [200, {'Content-Type' => 'text/plain'}, env['rack.logger']]
     end
+  end
 
-    it 'should return Logger::ERROR if the LOG_LEVEL evironment var is \'ERROR\'' do
-      ENV['LOG_LEVEL'] = 'ERROR'
-      Low::Middleware::RequestLogger.level.should == Logger::ERROR
-    end
-
-    it 'should return Logger::WARN if the LOG_LEVEL evironment var is \'WARN\'' do
-      ENV['LOG_LEVEL'] = 'WARN'
-      Low::Middleware::RequestLogger.level.should == Logger::WARN
-    end
-
-    it 'should return Logger::INFO if the LOG_LEVEL evironment var is \'INFO\'' do
-      ENV['LOG_LEVEL'] = 'INFO'
-      Low::Middleware::RequestLogger.level.should == Logger::INFO
-    end
-
-    it 'should return Logger::DEBUG if the LOG_LEVEL evironment var is \'DEBUG\'' do
-      ENV['LOG_LEVEL'] = 'DEBUG'
-      Low::Middleware::RequestLogger.level.should == Logger::DEBUG
-    end
-
-    it 'should return Logger::INFO if the LOG_LEVEL evironment var is not set' do
-      ENV['LOG_LEVEL'] = nil
-      Low::Middleware::RequestLogger.level.should == Logger::INFO
-    end
+  it 'should set rack.logger to an instance of `Low::ScopedLogger` with scope set to \'request_id\'
+      and level set to \'low.log_level\'' do
+    rack = Low::Middleware::RequestLogger.new test_app
+    response = rack.call({'request_id' => 'abc123', 'low.log_level' => Logger::FATAL})
+    logger = response[2]
+    logger.should be_a(Low::ScopedLogger)
+    logger.scope.should == 'abc123'
+    logger.level.should == Logger::FATAL
   end
 end
