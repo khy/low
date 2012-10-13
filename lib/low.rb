@@ -5,6 +5,7 @@ module Low
   autoload :Mongo,        'low/mongo'
 
   module Middleware
+    autoload :RackErrors,     'low/middleware/rack_errors'
     autoload :RequestId,      'low/middleware/request_id'
     autoload :RequestLogger,  'low/middleware/request_logger'
     autoload :SubdomainMap,   'low/middleware/subdomain_map'

@@ -33,29 +33,4 @@ describe Low::Middleware::RequestLogger do
       Low::Middleware::RequestLogger.level.should == Logger::INFO
     end
   end
-
-  describe '.io' do
-    it 'should return \'log/development.log\' if the RACK_ENV evironment var is \'development\'' do
-      begin
-        ENV['RACK_ENV'] = 'development'
-        Low::Middleware::RequestLogger.io.path.should == 'log/development.log'
-      ensure
-        ENV['RACK_ENV'] = 'test'
-      end
-    end
-
-    it 'should return \'log/test.log\' if the RACK_ENV evironment var is \'test\'' do
-      ENV['RACK_ENV'] = 'test'
-      Low::Middleware::RequestLogger.io.path.should == 'log/test.log'
-    end
-
-    it 'should return STDOUT if the RACK_ENV evironment var is \'production\'' do
-      begin
-        ENV['RACK_ENV'] = 'production'
-        Low::Middleware::RequestLogger.io.should == STDOUT
-      ensure
-        ENV['RACK_ENV'] = 'test'
-      end
-    end
-  end
 end
