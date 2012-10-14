@@ -82,5 +82,16 @@ describe Low::ScopedLogger do
       message.should =~ /abc123/
       message.should =~ /Yadda$/
     end
+
+    it 'should append the key if the message is specified in a block' do
+      io = StringIO.new
+      logger = Low::ScopedLogger.new(io)
+      logger.scope = 'abc123'
+      logger.info { 'Yadda' }
+
+      io.rewind; message = io.read
+      message.should =~ /abc123/
+      message.should =~ /Yadda$/
+    end
   end
 end
