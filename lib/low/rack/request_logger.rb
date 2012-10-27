@@ -7,12 +7,15 @@ module Low
     # `Low::ScopedLogger`, with `#level` and `#scope` taken from env.
     class RequestLogger
 
+      DEFAULT_KEY = 'rack.logger'
+
       def initialize(app, opts = {})
         @app = app
+        @key = opts[:key] || DEFAULT_KEY
       end
 
       def call(env)
-        env['rack.logger'] = logger(env)
+        env[@key] = logger(env)
         @app.call(env)
       end
 
