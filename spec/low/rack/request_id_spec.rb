@@ -1,12 +1,13 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
+require 'low/rack/request_id'
 
-describe Low::Middleware::RequestId do
+describe Low::Rack::RequestId do
   def app
     app = lambda do |env|
       [200, {'Content-Type' => 'text/plain'}, ['Request Id: ' + env['useless.request_id']]]
     end
 
-    Low::Middleware::RequestId.new(app)
+    Low::Rack::RequestId.new(app)
   end
 
   it 'should add a request ID to the env while proxying transparently' do

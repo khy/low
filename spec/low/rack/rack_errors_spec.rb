@@ -1,7 +1,8 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
 require 'fileutils'
+require 'low/rack/rack_errors'
 
-describe Low::Middleware::RackErrors do
+describe Low::Rack::RackErrors do
   def test_app
     lambda do |env|
       [200, {'Content-Type' => 'text/plain'}, env['rack.errors']]
@@ -14,28 +15,28 @@ describe Low::Middleware::RackErrors do
 
   it 'should log to the FS in the development RACK_ENV by default' do
     ENV['RACK_ENV'] = 'development'
-    rack = Low::Middleware::RackErrors.new test_app
+    rack = Low::Rack::RackErrors.new test_app
     response = rack.call({})
     response[2].path.should == 'log/development.log'
   end
 
   it 'should log to the FS in the test RACK_ENV by default' do
     ENV['RACK_ENV'] = 'test'
-    rack = Low::Middleware::RackErrors.new test_app
+    rack = Low::Rack::RackErrors.new test_app
     response = rack.call({})
     response[2].path.should == 'log/test.log'
   end
 
   it 'should log to the FS in the specified RACK_ENV' do
     ENV['RACK_ENV'] = 'production'
-    rack = Low::Middleware::RackErrors.new test_app, fs_envs: ['production']
+    rack = Low::Rack::RackErrors.new test_app, fs_envs: ['production']
     response = rack.call({})
     response[2].path.should == 'log/production.log'
   end
 
   it 'should log to STDOUT if not in a specified RACK_ENV' do
     ENV['RACK_ENV'] = 'production'
-    rack = Low::Middleware::RackErrors.new test_app
+    rack = Low::Rack::RackErrors.new test_app
     response = rack.call({})
     response[2].should == STDOUT
   end

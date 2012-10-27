@@ -1,5 +1,5 @@
 module Low
-  module Middleware
+  module Rack
     class RackErrors
 
       DEFAULT_FS_ENVS = ['development', 'test']

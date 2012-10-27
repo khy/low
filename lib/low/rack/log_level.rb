@@ -1,7 +1,7 @@
 require 'logger'
 
 module Low
-  module Middleware
+  module Rack
     class LogLevel
 
       DEFAULT_DEFAULT_LEVEL = Logger::INFO

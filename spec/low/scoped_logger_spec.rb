@@ -1,4 +1,5 @@
 require File.dirname(__FILE__) + '/../spec_helper'
+require 'low/scoped_logger'
 
 describe Low::ScopedLogger do
   describe '#fatal' do

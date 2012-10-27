@@ -1,7 +1,8 @@
 require 'logger'
+require 'low/scoped_logger'
 
 module Low
-  module Middleware
+  module Rack
     # `RequestLogger` sets 'rack.logger' to an instance of
     # `Low::ScopedLogger`, with `#level` and `#scope` taken from env.
     class RequestLogger

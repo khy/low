@@ -1,4 +1,5 @@
 require File.dirname(__FILE__) + '/../spec_helper'
+require 'low/mongo'
 
 describe Low::Mongo do
   class MongoTest

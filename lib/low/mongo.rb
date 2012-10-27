@@ -4,9 +4,6 @@ module Low
   # The `Mongo` module defines an interface for a Mongo helper
   # class. It also includes two basic classes, `Local` and `Remote`.
   module Mongo
-    autoload :Heroku, 'low/mongo/heroku'
-    autoload :Util,   'low/mongo/util'
-
     # Simple access to a Mongo::Collection instance.
     def [](collection)
       db[collection]

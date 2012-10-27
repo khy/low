@@ -1,4 +1,6 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
+require 'low/mongo'
+require 'low/mongo/util'
 
 describe Low::Mongo::Util do
   describe '.extract_mongodb_uris' do

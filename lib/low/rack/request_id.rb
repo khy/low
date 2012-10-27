@@ -1,5 +1,7 @@
+require 'rack/request'
+
 module Low
-  module Middleware
+  module Rack
     # `RequestId` adds a value for env["request_id"]. `RequestLogger`, for one,
     # uses this value to scope the logger it instantiates.
     class RequestId
@@ -20,7 +22,7 @@ module Low
 
       def call(env)
         # If there is a request_id parameter,
-        req = Rack::Request.new(env)
+        req = ::Rack::Request.new(env)
 
         # and it's valid, use it;
         if req['request_id'] and RequestId.is_valid?(req['request_id'])

@@ -1,5 +1,6 @@
 require 'uri'
 require 'mongo'
+require 'low/mongo'
 
 module Low
   module Mongo

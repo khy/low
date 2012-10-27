@@ -1,3 +1,6 @@
+require 'low/mongo'
+require 'low/mongo/util'
+
 module Low
   module Mongo
     # The `Heroku` module provides helper methods for Mongo on Heroku.
