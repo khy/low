@@ -21,7 +21,11 @@ module Low
 
       def logger(env)
         logger = Low::ScopedLogger.new(env['rack.errors'])
-        logger.level = env['low.log_level'] || env['log_level']
+
+        if level = env['low.log_level'] || env['log_level']
+          logger.level = level
+        end
+
         logger.scope = env['request_id']
         logger
       end

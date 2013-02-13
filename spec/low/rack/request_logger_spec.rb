@@ -18,6 +18,15 @@ describe Low::Rack::RequestLogger do
     logger.level.should == Logger::FATAL
   end
 
+  it 'should ensure rack.logger has a level even if \'low.log_level\' is not set' do
+    app = lambda do |env|
+      [200, {'Content-Type' => 'text/plain'}, env['rack.logger']]
+    end
+    rack = Low::Rack::RequestLogger.new app
+    response = rack.call({})
+    response[2].level.should_not be_nil
+  end
+
   it 'should set the specified logger key' do
     app = lambda do |env|
       [200, {'Content-Type' => 'text/plain'}, env['another.logger']]
