@@ -15,10 +15,10 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
   gem.version       = Low::VERSION
 
-  gem.add_runtime_dependency 'rack'
-  gem.add_runtime_dependency 'mongo'
-  gem.add_runtime_dependency 'bson_ext'
+  gem.add_runtime_dependency 'rack',          '~> 1.4.1'
+  gem.add_runtime_dependency 'mongo',         '~> 1.8.2'
+  gem.add_runtime_dependency 'bson_ext',      '~> 1.8.2'
 
-  gem.add_development_dependency 'rspec'
-  gem.add_development_dependency 'rack-test'
+  gem.add_development_dependency 'rspec',     '~> 2.12.0'
+  gem.add_development_dependency 'rack-test', '~> 0.6.2'
 end
