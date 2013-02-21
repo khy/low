@@ -40,7 +40,7 @@ describe Low::Mongo do
     it 'should get a new ::Mongo::Connection instance for the specified #host' do
       mongo = MongoTest.new
       connection = double('mongo connection')
-      ::Mongo::Connection.should_receive(:new).with('localhost').and_return(connection)
+      ::Mongo::MongoClient.should_receive(:new).with('localhost').and_return(connection)
       mongo.connection.should == connection
     end
   end

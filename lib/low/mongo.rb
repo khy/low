@@ -21,7 +21,7 @@ module Low
 
     # The environment's Mongo::Connection instance.
     def connection
-      @connection ||= ::Mongo::Connection.new(host)
+      @connection ||= ::Mongo::MongoClient.new(host)
     end
 
     # The host that `#connection` will use - either this or
