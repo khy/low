@@ -10,7 +10,7 @@ module Low
       end
 
       def call(env)
-        env['rack.errors'] = io
+        env['rack.errors'] ||= io
         @app.call(env)
       end
 

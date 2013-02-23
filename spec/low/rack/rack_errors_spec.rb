@@ -40,4 +40,11 @@ describe Low::Rack::RackErrors do
     response = rack.call({})
     response[2].should == STDOUT
   end
+
+  it 'should not set rack.errors if it is already set' do
+    ENV['RACK_ENV'] = 'test'
+    rack = Low::Rack::RackErrors.new test_app
+    response = rack.call('rack.errors' => STDOUT)
+    response[2].should == STDOUT
+  end
 end
