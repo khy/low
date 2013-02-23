@@ -60,4 +60,11 @@ describe Low::Rack::LogLevel do
     response = rack.call({})
     response[2].should == Logger::DEBUG
   end
+
+  it 'should not set low.log_level if it is already set' do
+    ENV['LOG_LEVEL'] = 'DEBUG'
+    rack = Low::Rack::LogLevel.new test_app, default_level: Logger::DEBUG
+    response = rack.call({'low.log_level' => Logger::INFO})
+    response[2].should == Logger::INFO
+  end
 end

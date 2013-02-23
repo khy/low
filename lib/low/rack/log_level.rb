@@ -12,7 +12,7 @@ module Low
       end
 
       def call(env)
-        env['low.log_level'] = log_level
+        env['low.log_level'] ||= log_level
         @app.call(env)
       end
 
