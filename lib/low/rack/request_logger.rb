@@ -1,4 +1,5 @@
 require 'logger'
+require 'low'
 require 'low/scoped_logger'
 
 module Low
@@ -11,7 +12,7 @@ module Low
 
       def initialize(app, opts = {})
         @app = app
-        @key = opts[:key] || DEFAULT_KEY
+        @key = opts[:key] || Low::DEFAULT_LOGGER_KEY
       end
 
       def call(env)
