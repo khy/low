@@ -1,4 +1,4 @@
-require 'low'
+require 'low/rack/default'
 
 module Low
   module Rack
@@ -10,7 +10,7 @@ module Low
 
       def initialize(app, opts = {})
         @app = app
-        @logger_key = opts[:logger_key] || Low::DEFAULT_LOGGER_KEY
+        @logger_key = opts[:logger_key] || Low::Rack::Default::LOGGER_KEY
       end
 
       def call(env)

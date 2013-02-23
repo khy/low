@@ -1,6 +1,9 @@
 module Low
   module Rack
     class Default
+
+      LOGGER_KEY = 'rack.logger'
+
       def initialize(app)
         @app = app
       end
