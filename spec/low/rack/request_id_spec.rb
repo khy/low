@@ -27,4 +27,10 @@ describe Low::Rack::RequestId do
     res.should be_ok
     res.body.should_not == 'Request Id: (jah)'
   end
+
+  it 'should not set low.request_id if it is already set' do
+    set_app = lambda { |env| app.call(env.merge('low.request_id' => 'special request ID')) }
+    res = Rack::MockRequest.new(set_app).get('http://low.edu?request_id=jah')
+    res.body.should == 'Request Id: special request ID'
+  end
 end
