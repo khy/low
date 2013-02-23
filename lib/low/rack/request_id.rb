@@ -26,11 +26,11 @@ module Low
 
         # and it's valid, use it;
         if req['request_id'] and RequestId.is_valid?(req['request_id'])
-          env['useless.request_id'] = req['request_id']
+          env['low.request_id'] = req['request_id']
 
         # otherwise, use the generated one
         else
-          env['useless.request_id'] = @current_request_id.to_s
+          env['low.request_id'] = @current_request_id.to_s
         end
 
         # and call the app.
