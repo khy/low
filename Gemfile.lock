@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    low (0.0.16)
+    low (0.0.17)
       bson_ext (~> 1.8.2)
       mongo (~> 1.8.2)
       rack (~> 1.5.2)
